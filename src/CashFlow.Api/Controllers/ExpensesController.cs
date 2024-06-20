@@ -15,9 +15,9 @@ public class ExpensesController : ControllerBase
     [ProducesResponseType(typeof(RequestRegisterExpensiveJson), 200)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public IActionResult Register([FromServices] IExpensesRepository expensesRepository, [FromBody] RequestRegisterExpensiveJson request)
+    public IActionResult Register([FromServices] IUseCase<RequestRegisterExpensiveJson, ResponseRegisteredExpenseJson> useCase, [FromBody] RequestRegisterExpensiveJson request)
     {
-        var response = new RegisterExpensiveUseCase(expensesRepository).Execute(request);
+        var response = useCase.Execute(request);
 
         return Created(string.Empty, response);
     }

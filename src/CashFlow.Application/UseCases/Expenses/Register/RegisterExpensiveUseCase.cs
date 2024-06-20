@@ -9,9 +9,11 @@ namespace CashFlow.Application.UseCases.Expenses.Register;
 public class RegisterExpensiveUseCase : IUseCase<RequestRegisterExpensiveJson, ResponseRegisteredExpenseJson>
 {
     private readonly IExpensesRepository _repository;
-    public RegisterExpensiveUseCase(IExpensesRepository repository)
+    private readonly IUnitOfWork _unitOfWork;
+    public RegisterExpensiveUseCase(IExpensesRepository repository, IUnitOfWork unitOfWork)
     {
         _repository = repository;
+        _unitOfWork = unitOfWork;
     }
     public ResponseRegisteredExpenseJson Execute(RequestRegisterExpensiveJson request)
     {
@@ -27,6 +29,7 @@ public class RegisterExpensiveUseCase : IUseCase<RequestRegisterExpensiveJson, R
         };
 
         _repository.Add(entity);
+        _unitOfWork.Commit();
 
         return new ResponseRegisteredExpenseJson { Title = request.Title };
     }
