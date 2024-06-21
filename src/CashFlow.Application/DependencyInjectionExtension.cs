@@ -10,6 +10,6 @@ public static class DependencyInjectionExtension
 {
     public static void AddApplication(this IServiceCollection services)
     {
-        services.AddScoped<IUseCase<RequestRegisterExpensiveJson, ResponseRegisteredExpenseJson>, RegisterExpensiveUseCase>();
+        services.AddScoped<IUseCase<RequestRegisterExpensiveJson, Task<ResponseRegisteredExpenseJson>>, RegisterExpensiveUseCase>();
     }
 }

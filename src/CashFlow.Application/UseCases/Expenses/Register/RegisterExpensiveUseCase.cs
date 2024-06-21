@@ -6,7 +6,7 @@ using CashFlow.Exception.ExceptionBase;
 
 namespace CashFlow.Application.UseCases.Expenses.Register;
 
-public class RegisterExpensiveUseCase : IUseCase<RequestRegisterExpensiveJson, ResponseRegisteredExpenseJson>
+public class RegisterExpensiveUseCase : IUseCase<RequestRegisterExpensiveJson, Task<ResponseRegisteredExpenseJson>>
 {
     private readonly IExpensesRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
@@ -15,7 +15,7 @@ public class RegisterExpensiveUseCase : IUseCase<RequestRegisterExpensiveJson, R
         _repository = repository;
         _unitOfWork = unitOfWork;
     }
-    public ResponseRegisteredExpenseJson Execute(RequestRegisterExpensiveJson request)
+    public async Task<ResponseRegisteredExpenseJson> Execute(RequestRegisterExpensiveJson request)
     {
         Validate(request);
 
@@ -25,11 +25,11 @@ public class RegisterExpensiveUseCase : IUseCase<RequestRegisterExpensiveJson, R
             Amount = request.Amount,
             Date = request.Date,
             Description = request.Description,
-            PaymentType = (Domain.EPaymentTypeEnum)request.PaymentType
+            PaymentType = (EPaymentTypeEnum)request.PaymentType
         };
 
-        _repository.Add(entity);
-        _unitOfWork.Commit();
+        await _repository.Add(entity);
+        await _unitOfWork.Commit();
 
         return new ResponseRegisteredExpenseJson { Title = request.Title };
     }
