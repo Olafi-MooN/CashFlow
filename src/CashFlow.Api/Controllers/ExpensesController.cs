@@ -12,12 +12,14 @@ namespace CashFlow.Api.Controllers;
 public class ExpensesController : ControllerBase
 {
     [HttpPost]
-    [ProducesResponseType(typeof(RequestRegisterExpensiveJson), 200)]
+    [ProducesResponseType(typeof(RequestRegisterExpensiveJson), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public IActionResult Register([FromServices] IUseCase<RequestRegisterExpensiveJson, Task<ResponseRegisteredExpenseJson>> useCase, [FromBody] RequestRegisterExpensiveJson request)
+    public async Task<IActionResult> Register(
+        [FromServices] IUseCase<RequestRegisterExpensiveJson, Task<ResponseRegisteredExpenseJson>> useCase,
+        [FromBody] RequestRegisterExpensiveJson request)
     {
-        var response = useCase.Execute(request);
+        var response = await useCase.Execute(request);
 
         return Created(string.Empty, response);
     }
