@@ -132,6 +132,9 @@
   <data name="TITLE_REQUIRED" xml:space="preserve">
     <value>O Titulo é querido</value>
   </data>
+  <data name="EXPENSE_NOT_FOUND" xml:space="preserve">
+    <value>Despesa não encontrada</value>
+  </data>
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Erro desconhecido</value>
   </data>

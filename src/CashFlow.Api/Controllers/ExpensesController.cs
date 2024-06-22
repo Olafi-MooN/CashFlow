@@ -22,7 +22,6 @@ public class ExpensesController : ControllerBase
         [FromBody] RequestRegisterExpensiveJson request)
     {
         var response = await useCase.Execute(request);
-
         return Created(string.Empty, response);
     }
 
@@ -45,10 +44,10 @@ public class ExpensesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetExpenseById(
         [FromRoute] long id,
-        [FromServices] IUseCase<object, Task<ResponseExpensesJson>> useCase
+        [FromServices] IGetByIdExpenseUseCase useCase
    )
     {
-        var response = await useCase.Execute();
+        var response = await useCase.Execute(id);
         return Ok(response);
     }
 }
