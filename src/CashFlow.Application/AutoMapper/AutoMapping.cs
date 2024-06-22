@@ -17,10 +17,12 @@ public class AutoMapping : Profile
     private void RequestToEntity()
     {
         CreateMap<RequestRegisterExpensiveJson, Expense>();
+        CreateMap<ResponseExpensesJson, List<Expense>>();
     }
 
     private void EntityToResponse()
     {
         CreateMap<Expense, ResponseRegisteredExpenseJson>();
+        CreateMap<Expense, ResponseExpenseJson>();
     }
 }

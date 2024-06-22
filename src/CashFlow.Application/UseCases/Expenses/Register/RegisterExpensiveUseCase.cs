@@ -32,6 +32,11 @@ public class RegisterExpensiveUseCase : IUseCase<RequestRegisterExpensiveJson, T
         return new ResponseRegisteredExpenseJson { Title = request.Title };
     }
 
+    public Task<ResponseRegisteredExpenseJson> Execute()
+    {
+        throw new NotImplementedException();
+    }
+
     private void Validate(RequestRegisterExpensiveJson request)
     {
         var messagesError = new RegisterExpensiveValidator().Validate(request).Errors.Select(x => x.ErrorMessage).ToList();
