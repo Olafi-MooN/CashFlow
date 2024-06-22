@@ -7,7 +7,7 @@ using CashFlow.Exception.ExceptionBase;
 
 namespace CashFlow.Application.UseCases.Expenses.Register;
 
-public class RegisterExpensiveUseCase : IUseCase<RequestRegisterExpensiveJson, Task<ResponseRegisteredExpenseJson>>
+public class RegisterExpensiveUseCase : IRegisterExpenseUseCase
 {
     private readonly IExpensesRepository _repository;
     private readonly IUnitOfWork _unitOfWork;

@@ -21,7 +21,7 @@ public static class DependencyInjectionExtension
 
     private static void AddUseCase(IServiceCollection services)
     {
-        services.AddScoped<IUseCase<RequestRegisterExpensiveJson, Task<ResponseRegisteredExpenseJson>>, RegisterExpensiveUseCase>();
-        services.AddScoped<IUseCase<object, Task<ResponseExpensesJson>>, GetAllExpensesUseCase>();
+        services.AddScoped<IRegisterExpenseUseCase, RegisterExpensiveUseCase>();
+        services.AddScoped<IGetAllExpensesUseCase, GetAllExpensesUseCase>();
     }
 }

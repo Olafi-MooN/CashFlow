@@ -6,7 +6,7 @@ using CashFlow.Domain;
 
 namespace CashFlow.Application;
 
-public class GetAllExpensesUseCase : IUseCase<object, Task<ResponseExpensesJson>>
+public class GetAllExpensesUseCase : IGetAllExpensesUseCase
 {
     private readonly IExpensesRepository _repository;
     private readonly IMapper _mapper;

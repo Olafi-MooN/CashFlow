@@ -1,4 +1,5 @@
-﻿using CashFlow.Application.DTOs;
+﻿using CashFlow.Application;
+using CashFlow.Application.DTOs;
 using CashFlow.Application.Interfaces;
 using CashFlow.Application.UseCases.Expenses.Register;
 using CashFlow.Communication.Requests;
@@ -17,7 +18,7 @@ public class ExpensesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Register(
-        [FromServices] IUseCase<RequestRegisterExpensiveJson, Task<ResponseRegisteredExpenseJson>> useCase,
+        [FromServices] IRegisterExpenseUseCase useCase,
         [FromBody] RequestRegisterExpensiveJson request)
     {
         var response = await useCase.Execute(request);
@@ -27,14 +28,27 @@ public class ExpensesController : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(typeof(ResponseExpensesJson), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetAllExpenses(
-         [FromServices] IUseCase<object, Task<ResponseExpensesJson>> useCase
+         [FromServices] IGetAllExpensesUseCase useCase
     )
     {
         var response = await useCase.Execute();
         return Ok(response);
     }
 
+    [HttpGet]
+    [Route("{id}")]
+    [ProducesResponseType(typeof(ResponseExpensesJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> GetExpenseById(
+        [FromRoute] long id,
+        [FromServices] IUseCase<object, Task<ResponseExpensesJson>> useCase
+   )
+    {
+        var response = await useCase.Execute();
+        return Ok(response);
+    }
 }
