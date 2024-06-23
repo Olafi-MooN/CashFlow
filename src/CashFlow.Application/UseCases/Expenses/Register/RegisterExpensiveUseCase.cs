@@ -7,18 +7,11 @@ using CashFlow.Exception.ExceptionBase;
 
 namespace CashFlow.Application.UseCases.Expenses.Register;
 
-public class RegisterExpensiveUseCase : IRegisterExpenseUseCase
+public class RegisterExpensiveUseCase(IExpensesRepository repository, IUnitOfWork unitOfWork, IMapper mapper) : IRegisterExpenseUseCase
 {
-    private readonly IExpensesRepository _repository;
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
-
-    public RegisterExpensiveUseCase(IExpensesRepository repository, IUnitOfWork unitOfWork, IMapper mapper)
-    {
-        _repository = repository;
-        _unitOfWork = unitOfWork;
-        _mapper = mapper;
-    }
+    private readonly IExpensesRepository _repository = repository;
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly IMapper _mapper = mapper;
 
     public async Task<ResponseRegisteredExpenseJson> Execute(RequestRegisterExpensiveJson request)
     {
@@ -30,11 +23,6 @@ public class RegisterExpensiveUseCase : IRegisterExpenseUseCase
         await _unitOfWork.Commit();
 
         return new ResponseRegisteredExpenseJson { Title = request.Title };
-    }
-
-    public Task<ResponseRegisteredExpenseJson> Execute()
-    {
-        throw new NotImplementedException();
     }
 
     private void Validate(RequestRegisterExpensiveJson request)

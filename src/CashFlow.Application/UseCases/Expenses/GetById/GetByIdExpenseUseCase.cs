@@ -5,15 +5,11 @@ using CashFlow.Exception;
 
 namespace CashFlow.Application;
 
-public class GetByIdExpenseUseCase : IGetByIdExpenseUseCase
+public class GetByIdExpenseUseCase(IExpensesRepository repository, IMapper mapper) : IGetByIdExpenseUseCase
 {
-    private readonly IExpensesRepository _repository;
-    private readonly IMapper _mapper;
-    public GetByIdExpenseUseCase(IExpensesRepository repository, IMapper mapper)
-    {
-        _repository = repository;
-        _mapper = mapper;
-    }
+    private readonly IExpensesRepository _repository = repository;
+    private readonly IMapper _mapper = mapper;
+
     public async Task<ResponseExpenseJson> Execute(long request)
     {
         var expense = await _repository.GetById(request);
@@ -22,10 +18,5 @@ public class GetByIdExpenseUseCase : IGetByIdExpenseUseCase
             throw new NotFoundException(ResourceErrorMessages.EXPENSE_NOT_FOUND);
 
         return _mapper.Map<ResponseExpenseJson>(expense);
-    }
-
-    public Task<ResponseExpenseJson> Execute()
-    {
-        throw new NotImplementedException();
     }
 }

@@ -13,29 +13,19 @@ public class ExceptionFilter : IExceptionFilter
         if (context.Exception is CashFlowException)
             HandleProjectException(context);
         else
-            ThrowUnknowError(context);
+            ThrowUnknownError(context);
     }
 
     private void HandleProjectException(ExceptionContext context)
     {
-        if (context.Exception is ErrorOnValidateException errorOnValidateException)
-        {
-            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-            context.Result = new BadRequestObjectResult(new ResponseErrorJson(errorOnValidateException.Errors));
-        }
-        else if (context.Exception is NotFoundException notFoundException)
-        {
-            context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
-            context.Result = new NotFoundObjectResult(new ResponseErrorJson(notFoundException.Message));
-        }
-        else
-        {
-            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-            context.Result = new BadRequestObjectResult(new ResponseErrorJson(context.Exception.Message));
-        }
+        var CashFlowException = context.Exception as CashFlowException;
+        var errorResponse = new ResponseErrorJson(CashFlowException.Message);
+
+        context.HttpContext.Response.StatusCode = CashFlowException.StatusCode;
+        context.Result = new ObjectResult(errorResponse);
     }
 
-    private void ThrowUnknowError(ExceptionContext context)
+    private void ThrowUnknownError(ExceptionContext context)
     {
         context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
         context.Result = new ObjectResult(new ResponseErrorJson(ResourceErrorMessages.UNKNOWN_ERROR));
