@@ -12,7 +12,7 @@ public class GetByIdExpenseUseCase(IExpensesRepository repository, IMapper mappe
 
     public async Task<ResponseExpenseJson> Execute(long request)
     {
-        var expense = await _repository.GetById(request);
+        var expense = await (_repository as IExpenseReadOnlyRepository).GetById(request);
 
         if (expense is null)
             throw new NotFoundException(ResourceErrorMessages.EXPENSE_NOT_FOUND);

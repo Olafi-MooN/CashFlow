@@ -62,21 +62,24 @@ public class ExpensesController : ControllerBase
         [FromServices] IDeleteExpenseByIdUseCase useCase
     )
     {
-        var response = await useCase.Execute(id);
+        await useCase.Execute(id);
 
         return NoContent();
     }
 
     [HttpPut]
+    [Route("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> UpdateExpenseById(
         [FromServices] IUpdateByIdExpenseUseCase useCase,
-        [FromBody] RequestUpdateExpenseJson request
+        [FromBody] RequestUpdateExpenseJson request,
+        [FromRoute] long id
     )
     {
-        var response = await useCase.Execute(request);
+        request.RouteId = id;
+        await useCase.Execute(request);
 
         return NoContent();
     }

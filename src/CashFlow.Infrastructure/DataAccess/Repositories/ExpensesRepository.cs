@@ -22,17 +22,18 @@ internal class ExpensesRepository : IExpensesRepository
         return await _dbContext.Expenses.AsNoTracking().ToListAsync();
     }
 
-    public async Task<Expense?> GetById(long id)
+    async Task<Expense?> IExpenseReadOnlyRepository.GetById(long id)
     {
         var response = await _dbContext.Expenses.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         return response;
     }
 
-    /// <summary>
-    /// This method is used to delete an expense by id and return TRUE if the expense was found and deleted.
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
+    async Task<Expense?> IExpensesUpdateOnlyRepository.GetById(long id)
+    {
+        var response = await _dbContext.Expenses.FirstOrDefaultAsync(x => x.Id == id);
+        return response;
+    }
+
     public async Task<bool> DeleteById(long id)
     {
         var response = await _dbContext.Expenses.FirstOrDefaultAsync(x => x.Id == id);
