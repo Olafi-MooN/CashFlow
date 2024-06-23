@@ -3,4 +3,4 @@ using CashFlow.Communication.Responses;
 
 namespace CashFlow.Application;
 
-public interface IGetAllExpensesUseCase : IUseCase<object, Task<ResponseExpensesJson>> { }
+public interface IGetAllExpensesUseCase : IUseCase<object?, Task<ResponseExpensesJson>> { }

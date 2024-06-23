@@ -18,10 +18,10 @@ public class ExceptionFilter : IExceptionFilter
 
     private void HandleProjectException(ExceptionContext context)
     {
-        var CashFlowException = context.Exception as CashFlowException;
-        var errorResponse = new ResponseErrorJson(CashFlowException.Message);
+        var cashFlowException = (CashFlowException)context.Exception;
+        var errorResponse = new ResponseErrorJson(cashFlowException.GetErrors());
 
-        context.HttpContext.Response.StatusCode = CashFlowException.StatusCode;
+        context.HttpContext.Response.StatusCode = cashFlowException.StatusCode;
         context.Result = new ObjectResult(errorResponse);
     }
 
