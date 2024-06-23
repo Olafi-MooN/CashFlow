@@ -25,5 +25,6 @@ public static class DependencyInjectionExtension
         services.AddScoped<IGetAllExpensesUseCase, GetAllExpensesUseCase>();
         services.AddScoped<IGetByIdExpenseUseCase, GetByIdExpenseUseCase>();
         services.AddScoped<IDeleteExpenseByIdUseCase, DeleteExpenseById>();
+        services.AddScoped<IUpdateByIdExpenseUseCase, UpdateByIdExpenseUseCase>();
     }
 }

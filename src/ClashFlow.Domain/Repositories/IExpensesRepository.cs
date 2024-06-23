@@ -6,4 +6,5 @@ public interface IExpensesRepository
     Task<List<Expense>> GetAll();
     Task<Expense?> GetById(long id);
     Task<bool> DeleteById(long id);
+    Task<bool> UpdateById(Expense expense);
 }

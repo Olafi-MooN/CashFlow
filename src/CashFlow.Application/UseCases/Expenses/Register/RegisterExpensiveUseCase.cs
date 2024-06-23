@@ -27,7 +27,7 @@ public class RegisterExpensiveUseCase(IExpensesRepository repository, IUnitOfWor
 
     private void Validate(RequestRegisterExpensiveJson request)
     {
-        var messagesError = new RegisterExpensiveValidator().Validate(request).Errors.Select(x => x.ErrorMessage).ToList();
+        var messagesError = new ExpensiveValidator().Validate(request).Errors.Select(x => x.ErrorMessage).ToList();
         if (messagesError.Count > 0)
             throw new ErrorOnValidateException(messagesError);
     }

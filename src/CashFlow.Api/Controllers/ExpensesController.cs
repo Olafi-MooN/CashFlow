@@ -2,6 +2,7 @@
 using CashFlow.Application.DTOs;
 using CashFlow.Application.Interfaces;
 using CashFlow.Application.UseCases.Expenses.Register;
+using CashFlow.Communication;
 using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
 using CashFlow.Domain;
@@ -62,6 +63,20 @@ public class ExpensesController : ControllerBase
     )
     {
         var response = await useCase.Execute(id);
+
+        return NoContent();
+    }
+
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> UpdateExpenseById(
+        [FromServices] IUpdateByIdExpenseUseCase useCase,
+        [FromBody] RequestUpdateExpenseJson request
+    )
+    {
+        var response = await useCase.Execute(request);
 
         return NoContent();
     }

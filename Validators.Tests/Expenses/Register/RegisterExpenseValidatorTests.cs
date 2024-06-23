@@ -12,7 +12,7 @@ public class RegisterExpenseValidatorTests
     public void Success()
     {
         // Arrange - Configuração da instancias do que precisa ser executado o teste
-        var validator = new RegisterExpensiveValidator();
+        var validator = new ExpensiveValidator();
         var request = new RequestRegisterExpensiveJsonBuilder().Build();
 
         // Act 
@@ -29,9 +29,9 @@ public class RegisterExpenseValidatorTests
     public void ErrorTitleEmpty(string? title)
     {
         // Arrange - Configuração da instancias do que precisa ser executado o teste
-        var validator = new RegisterExpensiveValidator();
+        var validator = new ExpensiveValidator();
         var request = new RequestRegisterExpensiveJsonBuilder().Build();
-        request.Title = title;
+        request.Title = title ?? string.Empty;
         // Act 
         var result = validator.Validate(request);
 
@@ -44,9 +44,9 @@ public class RegisterExpenseValidatorTests
     public void ErrorPaymentTypeInvalid()
     {
         // Arrange - Configuração da instancias do que precisa ser executado o teste
-        var validator = new RegisterExpensiveValidator();
+        var validator = new ExpensiveValidator();
         var request = new RequestRegisterExpensiveJsonBuilder().Build();
-        request.PaymentType = (EPaymentTypeEnum) 1000;
+        request.PaymentType = (EPaymentTypeEnum)1000;
 
         // Act 
         var result = validator.Validate(request);
@@ -64,7 +64,7 @@ public class RegisterExpenseValidatorTests
     public void ErrorAmoutInvalid(decimal amount)
     {
         // Arrange - Configuração da instancias do que precisa ser executado o teste
-        var validator = new RegisterExpensiveValidator();
+        var validator = new ExpensiveValidator();
         var request = new RequestRegisterExpensiveJsonBuilder().Build();
         request.Amount = amount;
 

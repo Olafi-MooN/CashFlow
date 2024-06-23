@@ -42,6 +42,16 @@ internal class ExpensesRepository : IExpensesRepository
         _dbContext.Expenses.Remove(response);
 
         return true;
+    }
 
+    public async Task<bool> UpdateById(Expense expense)
+    {
+
+        var response = await _dbContext.Expenses.FirstOrDefaultAsync(x => x.Id == expense.Id);
+
+        if (response is null) return false;
+
+        var result = _dbContext.Expenses.Update(expense);
+        return true;
     }
 }
