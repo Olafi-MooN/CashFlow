@@ -27,4 +27,21 @@ internal class ExpensesRepository : IExpensesRepository
         var response = await _dbContext.Expenses.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         return response;
     }
+
+    /// <summary>
+    /// This method is used to delete an expense by id and return TRUE if the expense was found and deleted.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<bool> DeleteById(long id)
+    {
+        var response = await _dbContext.Expenses.FirstOrDefaultAsync(x => x.Id == id);
+
+        if (response is null) return false;
+
+        _dbContext.Expenses.Remove(response);
+
+        return true;
+
+    }
 }

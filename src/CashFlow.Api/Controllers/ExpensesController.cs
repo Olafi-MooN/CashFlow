@@ -45,9 +45,24 @@ public class ExpensesController : ControllerBase
     public async Task<IActionResult> GetExpenseById(
         [FromRoute] long id,
         [FromServices] IGetByIdExpenseUseCase useCase
-   )
+    )
     {
         var response = await useCase.Execute(id);
         return Ok(response);
+    }
+
+    [HttpDelete]
+    [Route("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> DeleteExpenseById(
+        [FromRoute] long id,
+        [FromServices] IDeleteExpenseByIdUseCase useCase
+    )
+    {
+        var response = await useCase.Execute(id);
+
+        return NoContent();
     }
 }

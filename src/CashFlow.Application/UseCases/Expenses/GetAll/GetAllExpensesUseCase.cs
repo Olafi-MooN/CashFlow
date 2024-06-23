@@ -11,7 +11,7 @@ public class GetAllExpensesUseCase(IExpensesRepository repository, IMapper mappe
     private readonly IExpensesRepository _repository = repository;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<ResponseExpensesJson> Execute()
+    public async Task<ResponseExpensesJson> Execute(object? request = null)
     {
         var expenses = await _repository.GetAll();
         var response = new ResponseExpensesJson
@@ -20,10 +20,5 @@ public class GetAllExpensesUseCase(IExpensesRepository repository, IMapper mappe
         };
 
         return response;
-    }
-
-    public Task<ResponseExpensesJson> Execute(object request)
-    {
-        throw new NotImplementedException();
     }
 }
