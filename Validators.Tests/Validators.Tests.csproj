@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\src\CashFlow.Application\CashFlow.Application.csproj" />
-    <ProjectReference Include="..\src\CashFlow.Communication\CashFlow.Communication\CashFlow.Communication.csproj" />
+    <ProjectReference Include="..\src\CashFlow.Communication\CashFlow.Communication.csproj" />
     <ProjectReference Include="..\tests\CommonTestUtilities\CommonTestUtilities.csproj" />
   </ItemGroup>
 
