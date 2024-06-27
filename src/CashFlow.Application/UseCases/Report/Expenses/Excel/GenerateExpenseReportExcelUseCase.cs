@@ -1,4 +1,6 @@
-﻿using CashFlow.Communication;
+﻿using System.Globalization;
+using CashFlow.Communication;
+using CashFlow.Domain;
 using CashFlow.Domain.Messages.Reports;
 using ClosedXML.Excel;
 
@@ -6,9 +8,20 @@ namespace CashFlow.Application;
 
 public class GenerateExpenseReportExcelUseCase : IGenerateExpenseReportExcelUseCase
 {
-    public Task<byte[]> Execute(RequestInFormationReportJson request)
+    private readonly IExpensesRepository _repository;
+
+    public GenerateExpenseReportExcelUseCase(IExpensesRepository repository)
     {
-        var xlWorkbook = new XLWorkbook
+        _repository = repository;
+    }
+
+    public async Task<byte[]> Execute(RequestInFormationReportJson request)
+    {
+        var expenses = await _repository.FilterByMonth(request.Month);
+
+        if (expenses.Count == 0) return [];
+
+        using var xlWorkbook = new XLWorkbook
         {
             Author = "CashFlow"
         };
@@ -17,13 +30,18 @@ public class GenerateExpenseReportExcelUseCase : IGenerateExpenseReportExcelUseC
 
         var worksheet = xlWorkbook.Worksheets.Add($"Expenses-{request.Month:Y}");
 
+
         InsertHeader(worksheet);
+        InsertBody(worksheet, expenses);
+
+        worksheet.Column(4).Style.NumberFormat.Format = "R$ #,##0.00";
+        worksheet.Columns().AdjustToContents();
 
         var stream = new MemoryStream();
 
         xlWorkbook.SaveAs(stream);
 
-        return Task.FromResult(stream.ToArray());
+        return stream.ToArray();
     }
 
     private void InsertHeader(IXLWorksheet ixlWorkbook)
@@ -44,4 +62,19 @@ public class GenerateExpenseReportExcelUseCase : IGenerateExpenseReportExcelUseC
         ixlWorkbook.Cell("E1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
 
     }
+    private void InsertBody(IXLWorksheet ixlWorkbook, List<Expense> expenses)
+    {
+        var rowIndex = 2;
+        foreach (var expense in expenses)
+        {
+            var row = ixlWorkbook.Row(rowIndex++);
+            row.Cell(1).Value = expense.Title;
+            row.Cell(2).Value = expense.Date.ToString("dd/MM/yyyy", CultureInfo.GetCultureInfo("pt-BR"));
+            row.Cell(3).Value = expense.PaymentType.ToString();
+            row.Cell(4).Value = expense.Amount;
+            row.Cell(5).Value = expense.Description;
+        }
+    }
+
+
 }
