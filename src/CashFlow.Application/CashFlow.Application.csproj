@@ -11,6 +11,7 @@
       <PackageReference Include="ClosedXML" Version="0.102.2" />
       <PackageReference Include="FluentValidation" Version="11.9.1" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+      <PackageReference Include="PDFsharp-MigraDoc" Version="6.1.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -19,8 +20,17 @@
         <ProjectReference Include="..\ClashFlow.Domain\CashFlow.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="UseCases\Report\Expenses\" />
+     <ItemGroup>
+        <EmbeddedResource Include="UseCases\Report\Expenses\Pdf\Fonts\Raleway-Black.ttf" />
+        <EmbeddedResource Include="UseCases\Report\Expenses\Pdf\Fonts\Raleway-Regular.ttf" />
+        <EmbeddedResource Include="UseCases\Report\Expenses\Pdf\Fonts\WorkSans-Black.ttf" />
+        <EmbeddedResource Include="UseCases\Report\Expenses\Pdf\Fonts\WorkSans-Regular.ttf" />
     </ItemGroup>
 
+    <ItemGroup>
+        <None Update="UseCases\Report\Expenses\Pdf\images\profile.png">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    
 </Project>

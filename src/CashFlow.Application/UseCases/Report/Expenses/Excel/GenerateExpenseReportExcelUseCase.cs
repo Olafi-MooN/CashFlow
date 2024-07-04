@@ -70,7 +70,7 @@ public class GenerateExpenseReportExcelUseCase : IGenerateExpenseReportExcelUseC
             var row = ixlWorkbook.Row(rowIndex++);
             row.Cell(1).Value = expense.Title;
             row.Cell(2).Value = expense.Date.ToString("dd/MM/yyyy", CultureInfo.GetCultureInfo("pt-BR"));
-            row.Cell(3).Value = expense.PaymentType.ToString();
+            row.Cell(3).Value = expense.PaymentType.PaymentTypeToString();
             row.Cell(4).Value = expense.Amount;
             row.Cell(5).Value = expense.Description;
         }

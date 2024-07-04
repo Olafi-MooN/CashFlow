@@ -25,4 +25,20 @@ public class ReportController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpGet("/Expenses/Pdf")]
+    [ProducesResponseType(typeof(byte[]), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> GetPdf(
+        [FromQuery] RequestInFormationReportJson queryParams,
+        [FromServices] IGenerateExpenseReportPdfUseCase useCase
+        )
+    {
+        byte[] file = await useCase.Execute(queryParams);
+
+        if (file.Length > 0)
+            return File(file, MediaTypeNames.Application.Pdf, "report.pdf");
+
+        return NoContent();
+    }
 }

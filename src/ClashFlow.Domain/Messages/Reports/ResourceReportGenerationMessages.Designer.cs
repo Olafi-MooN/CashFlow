@@ -123,5 +123,51 @@ namespace CashFlow.Domain.Messages.Reports
                 return ResourceManager.GetString("TITLE", Culture);
             }
         }
+
+        public static string EXPENSES_FOR
+        {
+            get
+            {
+                return ResourceManager.GetString("EXPENSES_FOR", Culture);
+            }
+        }
+
+        public static string TOTAL_SPENT_IN
+        {
+            get
+            {
+                return ResourceManager.GetString("TOTAL_SPENT_IN", Culture);
+            }
+        }
+
+        public static string DEBIT_CARD
+        {
+            get
+            {
+                return ResourceManager.GetString("DEBIT_CARD", Culture);
+            }
+        }
+
+        public static string ELETRONIC_TRANSFER
+        {
+            get
+            {
+                return ResourceManager.GetString("ELETRONIC_TRANSFER", Culture);
+            }
+        }
+        public static string CASH
+        {
+            get
+            {
+                return ResourceManager.GetString("CASH", Culture);
+            }
+        }
+        public static string CREDIT_CARD
+        {
+            get
+            {
+                return ResourceManager.GetString("CREDIT_CARD", Culture);
+            }
+        }
     }
 }
