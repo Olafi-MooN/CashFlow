@@ -13,10 +13,10 @@ public class DeleteExpenseById : IDeleteExpenseByIdUseCase
         _repository = repository;
         _unitOfWork = unitOfWork;
     }
-    public async Task<bool> Execute(long id = 0)
+    public async Task<bool> Execute(long request = default!)
     {
-        var result = await _repository.DeleteById(id);
-        if (result is false) throw new NotFoundException(ResourceErrorMessages.EXPENSE_NOT_FOUND);
+        var result = await _repository.DeleteById(request);
+        if (result) throw new NotFoundException(ResourceErrorMessages.EXPENSE_NOT_FOUND);
         await _unitOfWork.Commit();
 
         return result;

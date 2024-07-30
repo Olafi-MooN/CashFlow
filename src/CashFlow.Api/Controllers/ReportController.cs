@@ -10,7 +10,7 @@ namespace CashFlow.Api.Controllers;
 public class ReportController : ControllerBase
 {
 
-    [HttpGet("/Expenses/Excel")]
+    [HttpGet("Expenses/Excel")]
     [ProducesResponseType(typeof(byte[]), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> GetExcel(
@@ -26,7 +26,7 @@ public class ReportController : ControllerBase
         return NoContent();
     }
 
-    [HttpGet("/Expenses/Pdf")]
+    [HttpGet("Expenses/Pdf")]
     [ProducesResponseType(typeof(byte[]), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> GetPdf(

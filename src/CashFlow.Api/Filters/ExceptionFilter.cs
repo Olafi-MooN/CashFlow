@@ -16,7 +16,7 @@ public class ExceptionFilter : IExceptionFilter
             ThrowUnknownError(context);
     }
 
-    private void HandleProjectException(ExceptionContext context)
+    private static void HandleProjectException(ExceptionContext context)
     {
         var cashFlowException = (CashFlowException)context.Exception;
         var errorResponse = new ResponseErrorJson(cashFlowException.GetErrors());
@@ -25,7 +25,7 @@ public class ExceptionFilter : IExceptionFilter
         context.Result = new ObjectResult(errorResponse);
     }
 
-    private void ThrowUnknownError(ExceptionContext context)
+    private static void ThrowUnknownError(ExceptionContext context)
     {
         context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
         context.Result = new ObjectResult(new ResponseErrorJson([ResourceErrorMessages.UNKNOWN_ERROR, context.Exception.Message]));

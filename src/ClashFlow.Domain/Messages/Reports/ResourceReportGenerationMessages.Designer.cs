@@ -169,5 +169,29 @@ namespace CashFlow.Domain.Messages.Reports
                 return ResourceManager.GetString("CREDIT_CARD", Culture);
             }
         }
+
+        public static string EMAIL_REQUIRED
+        {
+            get
+            {
+                return ResourceManager.GetString("EMAIL_REQUIRED", Culture);
+            }
+        }
+
+        public static string NAME_REQUIRED
+        {
+            get
+            {
+                return ResourceManager.GetString("NAME_REQUIRED", Culture);
+            }
+        }
+
+        public static string PASSWORD_REQUIRED
+        {
+            get
+            {
+                return ResourceManager.GetString("PASSWORD_REQUIRED", Culture);
+            }
+        }
     }
 }

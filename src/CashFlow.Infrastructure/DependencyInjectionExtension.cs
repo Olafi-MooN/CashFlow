@@ -11,13 +11,17 @@ public static class DependencyInjectionExtension
     {
         AddDbContext(services, configuration);
         AddRepositories(services);
+        AddSecurity(services);
     }
 
     private static void AddRepositories(IServiceCollection services)
     {
         services.AddScoped<IExpensesRepository, ExpensesRepository>();
+        services.AddScoped<IUsersRepository, UsersRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
+
+    private static void AddSecurity(IServiceCollection services) => services.AddScoped<IEncryptPassword, BCrypt>();
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
     {

@@ -138,6 +138,15 @@
   <data name="ELETRONIC_TRANSFER" xml:space="preserve">
     <value>Eletronic Transfer</value>
   </data>
+  <data name="EMAIL_REQUIRED" xml:space="preserve">
+    <value>The field 'Email' is not formatted valid</value>
+  </data>
+  <data name="NAME_REQUIRED" xml:space="preserve">
+    <value>The field 'Name' is required</value>
+  </data>
+  <data name="PASSWORD_REQUIRED" xml:space="preserve">
+    <value>The field 'Password' is required</value>
+  </data>
   <data name="PAYMENT_TYPE" xml:space="preserve">
     <value>Payment Type</value>
   </data>

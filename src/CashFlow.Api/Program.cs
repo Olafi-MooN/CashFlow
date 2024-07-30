@@ -33,4 +33,12 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// await MigrateDatabase();
+
 app.Run();
+
+async Task MigrateDatabase()
+{
+    await using var scope = app.Services.CreateAsyncScope();
+    await DataBaseMigration.MigrateDatabase(scope.ServiceProvider);
+}
