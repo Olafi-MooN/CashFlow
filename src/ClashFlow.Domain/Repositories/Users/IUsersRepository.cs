@@ -1,6 +1,6 @@
 ﻿namespace CashFlow.Domain;
 
-public interface IUsersRepository : IUserWriteOnlyRepository
+public interface IUsersRepository : IUserWriteOnlyRepository, IUserReadOnlyRepository
 {
 
 }

@@ -1,4 +1,5 @@
 ﻿using CashFlow.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace CashFlow.Infrastructure;
 
@@ -14,5 +15,10 @@ internal class UsersRepository : IUsersRepository
     {
         var response = await _dbContext.Users.AddAsync(user);
         return response.Entity;
+    }
+
+    public async Task<bool> ExistActiveUserWithEmail(string email)
+    {
+        return await _dbContext.Users.AnyAsync(x => x.Email == email);
     }
 }

@@ -156,4 +156,7 @@
   <data name="TOTAL_SPENT_IN" xml:space="preserve">
     <value>Total gasto em {0}</value>
   </data>
+  <data name="USER_ALREADY_EXISTS" xml:space="preserve">
+    <value>Usuário já existe</value>
+  </data>
 </root>

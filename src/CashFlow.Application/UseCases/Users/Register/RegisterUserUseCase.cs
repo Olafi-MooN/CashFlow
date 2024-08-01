@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CashFlow.Communication;
 using CashFlow.Domain;
+using CashFlow.Domain.Messages.Reports;
 using CashFlow.Exception.ExceptionBase;
 
 namespace CashFlow.Application;
@@ -20,24 +21,29 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         _encryptPassword = encryptPassword;
     }
 
-    public Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request = default!)
+    public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request = default!)
     {
-        Validate(request);
+        await Validate(request);
 
         var userRequest = _mapper.Map<User>(request);
+        userRequest.UserIdentifier = Guid.NewGuid();
         userRequest.Password = _encryptPassword.Encrypt(userRequest.Password);
 
-        var userEntity = _repository.Add(userRequest);
+        var userEntity = await _repository.Add(userRequest);
         var userResponseRegisteredUser = _mapper.Map<ResponseRegisteredUserJson>(userEntity);
 
-        _unitOfWork.Commit();
+        await _unitOfWork.Commit();
 
-        return Task.FromResult(userResponseRegisteredUser);
+        return userResponseRegisteredUser;
     }
 
-    private static void Validate(RequestRegisterUserJson request)
+    private async Task Validate(RequestRegisterUserJson request)
     {
         var messagesError = new UserValidator().Validate(request).Errors.Select(x => x.ErrorMessage).ToList();
+        var existActiveUserWithEmail = await _repository.ExistActiveUserWithEmail(request.Email);
+
+        if (existActiveUserWithEmail) messagesError.Add(ResourceReportGenerationMessages.USER_ALREADY_EXISTS);
+
         if (messagesError.Count > 0) throw new ErrorOnValidateException(messagesError);
     }
 }

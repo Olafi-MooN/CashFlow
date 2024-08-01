@@ -193,5 +193,12 @@ namespace CashFlow.Domain.Messages.Reports
                 return ResourceManager.GetString("PASSWORD_REQUIRED", Culture);
             }
         }
+        public static string USER_ALREADY_EXISTS
+        {
+            get
+            {
+                return ResourceManager.GetString("USER_ALREADY_EXISTS", Culture);
+            }
+        }
     }
 }
