@@ -12,13 +12,15 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     private readonly IUsersRepository _repository;
     private readonly IMapper _mapper;
     private readonly IEncryptPassword _encryptPassword;
+    private readonly IAccessTokenGenerator _accessTokenGenerator;
 
-    public RegisterUserUseCase(IUnitOfWork unitOfWork, IUsersRepository repository, IMapper mapper, IEncryptPassword encryptPassword)
+    public RegisterUserUseCase(IUnitOfWork unitOfWork, IUsersRepository repository, IMapper mapper, IEncryptPassword encryptPassword, IAccessTokenGenerator accessTokenGenerator)
     {
         _mapper = mapper;
         _repository = repository;
         _unitOfWork = unitOfWork;
         _encryptPassword = encryptPassword;
+        _accessTokenGenerator = accessTokenGenerator;
     }
 
     public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request = default!)

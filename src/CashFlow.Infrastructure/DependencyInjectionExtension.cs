@@ -19,6 +19,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<IExpensesRepository, ExpensesRepository>();
         services.AddScoped<IUsersRepository, UsersRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IAccessTokenGenerator, JwtTokenGenerator>();
     }
 
     private static void AddSecurity(IServiceCollection services) => services.AddScoped<IEncryptPassword, BCrypt>();
