@@ -10,15 +10,11 @@ public class RequestRegisterExpensiveJsonBuilder
     public RequestRegisterExpensiveJson Build()
     {
 
-        var faker = new Faker("en");
-
-        return new RequestRegisterExpensiveJson
-        {
-            Amount = faker.Finance.Amount(),
-            Date = faker.Date.Past(),
-            Description = faker.Commerce.Price(),
-            PaymentType = faker.PickRandom<EPaymentTypeEnum>(),
-            Title = faker.Commerce.ProductName(),
-        };
+        return new Faker<RequestRegisterExpensiveJson>()
+            .RuleFor(r => r.Title, faker => faker.Commerce.ProductName())
+            .RuleFor(r => r.Description, faker => faker.Commerce.ProductDescription())
+            .RuleFor(r => r.Date, faker => faker.Date.Past())
+            .RuleFor(r => r.PaymentType, faker => faker.PickRandom<EPaymentTypeEnum>())
+            .RuleFor(r => r.Amount, faker => faker.Random.Decimal(min: 1, max: 1000));
     }
 }

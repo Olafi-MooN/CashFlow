@@ -9,6 +9,7 @@ public static class DependencyInjectionExtension
 {
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        AddToken(services, configuration);
         AddDbContext(services, configuration);
         AddRepositories(services);
         AddSecurity(services);
@@ -19,7 +20,6 @@ public static class DependencyInjectionExtension
         services.AddScoped<IExpensesRepository, ExpensesRepository>();
         services.AddScoped<IUsersRepository, UsersRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IAccessTokenGenerator, JwtTokenGenerator>();
     }
 
     private static void AddSecurity(IServiceCollection services) => services.AddScoped<IEncryptPassword, BCrypt>();
@@ -30,5 +30,13 @@ public static class DependencyInjectionExtension
         var serverVersion = new MySqlServerVersion(new Version(5, 7, 44));
 
         services.AddDbContext<CashFlowDbContext>(config => config.UseMySql(connectionString, serverVersion));
+    }
+
+    private static void AddToken(IServiceCollection services, IConfiguration configuration)
+    {
+        var signinKey = configuration.GetValue<string>("Settings:Jwt:SigninKey");
+        var expiresMinutes = configuration.GetValue<uint>("Settings:Jwt:ExpiresMinutes");
+
+        services.AddScoped<IAccessTokenGenerator>(config => new JwtTokenGenerator(expiresMinutes, signinKey!));
     }
 }

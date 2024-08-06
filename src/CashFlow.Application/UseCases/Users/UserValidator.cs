@@ -11,6 +11,8 @@ public class UserValidator : AbstractValidator<RequestRegisterUserJson>
     {
         RuleFor(x => x.Name).NotEmpty().WithMessage(ResourceReportGenerationMessages.NAME_REQUIRED);
         RuleFor(x => x.Password).SetValidator(new PasswordValidator<RequestRegisterUserJson>());
-        RuleFor(x => x.Email).NotEmpty().WithMessage(ResourceReportGenerationMessages.PASSWORD_REQUIRED).EmailAddress().WithMessage(ResourceReportGenerationMessages.EMAIL_REQUIRED);
+        RuleFor(x => x.Email).NotEmpty().WithMessage(ResourceReportGenerationMessages.EMAIL_REQUIRED)
+            .EmailAddress().When(user => !string.IsNullOrWhiteSpace(user.Email), ApplyConditionTo.CurrentValidator).WithMessage(ResourceReportGenerationMessages.EMAIL_REQUIRED);
     }
 }
+

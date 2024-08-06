@@ -200,5 +200,19 @@ namespace CashFlow.Domain.Messages.Reports
                 return ResourceManager.GetString("USER_ALREADY_EXISTS", Culture);
             }
         }
+        public static string USER_NOT_FOUND
+        {
+            get
+            {
+                return ResourceManager.GetString("USER_NOT_FOUND", Culture);
+            }
+        }
+        public static string INVALID_LOGIN
+        {
+            get
+            {
+                return ResourceManager.GetString("INVALID_LOGIN", Culture);
+            }
+        }
     }
 }

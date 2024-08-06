@@ -32,6 +32,7 @@ public class RegisterExpenseValidatorTests
         var validator = new ExpensiveValidator();
         var request = new RequestRegisterExpensiveJsonBuilder().Build();
         request.Title = title ?? string.Empty;
+
         // Act 
         var result = validator.Validate(request);
 

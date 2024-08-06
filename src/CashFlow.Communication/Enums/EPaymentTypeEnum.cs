@@ -2,8 +2,8 @@
 
 public enum EPaymentTypeEnum
 {
-    Cash = 0,
-    CreditCard = 1,
-    DebitCard = 2,
-    EletronicTransferer = 3
+    Cash = 1,
+    CreditCard = 2,
+    DebitCard = 3,
+    EletronicTransferer = 4
 }
