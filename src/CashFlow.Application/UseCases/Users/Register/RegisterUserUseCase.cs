@@ -31,8 +31,9 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         userRequest.UserIdentifier = Guid.NewGuid();
         userRequest.Password = _encryptPassword.Encrypt(request.Password);
 
-        var userEntity = await _repository.Add(userRequest);
-        var userResponseRegisteredUser = _mapper.Map<ResponseRegisteredUserJson>(userEntity);
+        await _repository.Add(userRequest);
+
+        var userResponseRegisteredUser = _mapper.Map<ResponseRegisteredUserJson>(userRequest);
         userResponseRegisteredUser.Token = _accessTokenGenerator.Generate(userRequest);
 
         await _unitOfWork.Commit();

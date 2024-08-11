@@ -25,7 +25,7 @@ public class DoLoginUseCase : IDoLoginUseCase
 
         return new ResponseRegisteredUserJson()
         {
-            Id = user.Id,
+            Name = user.Name,
             Token = _accessTokenGenerator.Generate(user)
         };
     }

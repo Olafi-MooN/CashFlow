@@ -19,6 +19,7 @@ public class AutoMapping : Profile
     {
         CreateMap<RequestRegisterExpensiveJson, Expense>().ReverseMap();
         CreateMap<RequestRegisterUserJson, User>().ForMember(x => x.Password, x => x.Ignore()).ReverseMap();
+        CreateMap<RequestLoginJson, User>().ReverseMap();
     }
 
     private void EntityToResponseAndReverse()

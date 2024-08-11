@@ -11,7 +11,7 @@ public class PasswordValidatorTest
     [InlineData("_Senha123!")]
     [InlineData("_Senha!212")]
     [InlineData("Senha_!212")]
-    [InlineData("Se_!212")]
+    [InlineData("Se_!2122")]
     [InlineData("Senha_!2#")]
     public void Success(string password)
     {
