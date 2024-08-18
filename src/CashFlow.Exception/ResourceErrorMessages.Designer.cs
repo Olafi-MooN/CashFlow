@@ -153,5 +153,13 @@ namespace CashFlow.Exception
                 return ResourceManager.GetString("EMAIL_OR_PASSWORD_INVALID", resourceCulture);
             }
         }
+
+        public static string TOKEN_REQUIRED
+        {
+            get
+            {
+                return ResourceManager.GetString("TOKEN_REQUIRED", resourceCulture);
+            }
+        }
     }
 }

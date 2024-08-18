@@ -1,5 +1,7 @@
 ﻿using CashFlow.Domain;
+using CashFlow.Domain.Services.LoggedUser;
 using CashFlow.Infrastructure.Extensions;
+using CashFlow.Infrastructure.Services.LoggedUser;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +25,11 @@ public static class DependencyInjectionExtension
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 
-    private static void AddSecurity(IServiceCollection services) => services.AddScoped<IEncryptPassword, BCrypt>();
+    private static void AddSecurity(IServiceCollection services)
+    {
+        services.AddScoped<IEncryptPassword, BCrypt>();
+        services.AddScoped<ILoggedUser, LoggedUser>();
+    }
 
     private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
     {

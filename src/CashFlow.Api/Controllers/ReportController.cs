@@ -1,12 +1,15 @@
 ﻿using System.Net.Mime;
 using CashFlow.Application;
 using CashFlow.Communication;
+using CashFlow.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CashFlow.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(Roles = Roles.ADMIN)]
 public class ReportController : ControllerBase
 {
 

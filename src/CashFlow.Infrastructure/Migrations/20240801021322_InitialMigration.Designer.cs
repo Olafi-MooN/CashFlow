@@ -82,8 +82,6 @@ namespace CashFlow.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid>("UserIdentifier")
-                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 

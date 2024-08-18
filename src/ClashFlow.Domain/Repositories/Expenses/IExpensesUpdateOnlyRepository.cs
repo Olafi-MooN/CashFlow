@@ -3,5 +3,5 @@
 public interface IExpensesUpdateOnlyRepository
 {
     Task<bool> UpdateById(Expense expense);
-    Task<Expense?> GetById(long id);
+    Task<Expense?> GetByIdUpdate(long id, Guid userId);
 }

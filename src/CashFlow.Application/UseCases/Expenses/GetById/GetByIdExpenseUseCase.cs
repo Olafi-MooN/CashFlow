@@ -1,21 +1,23 @@
 ﻿using AutoMapper;
 using CashFlow.Communication.Responses;
 using CashFlow.Domain;
+using CashFlow.Domain.Security.token;
+using CashFlow.Domain.Services.LoggedUser;
 using CashFlow.Exception;
 
 namespace CashFlow.Application;
 
-public class GetByIdExpenseUseCase(IExpensesRepository repository, IMapper mapper) : IGetByIdExpenseUseCase
+public class GetByIdExpenseUseCase(IExpensesRepository repository, IMapper mapper, ILoggedUser loggedUser) : IGetByIdExpenseUseCase
 {
     private readonly IExpensesRepository _repository = repository;
     private readonly IMapper _mapper = mapper;
+    private readonly ILoggedUser _loggedUser = loggedUser;
 
-    public async Task<ResponseExpenseJson> Execute(long request)
+    public async Task<ResponseExpenseJson> Execute(long request = default!)
     {
-        var expense = await (_repository as IExpenseReadOnlyRepository).GetById(request);
+        var loggedUserResult = await _loggedUser.Get();
 
-        if (expense is null)
-            throw new NotFoundException(ResourceErrorMessages.EXPENSE_NOT_FOUND);
+        var expense = await (_repository as IExpenseReadOnlyRepository).GetByIdRead(request, loggedUserResult.Id) ?? throw new NotFoundException(ResourceErrorMessages.EXPENSE_NOT_FOUND);
 
         return _mapper.Map<ResponseExpenseJson>(expense);
     }

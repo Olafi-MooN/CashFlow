@@ -80,8 +80,7 @@ public class ExpensesController : ControllerBase
         [FromRoute] long id
     )
     {
-        request.RouteId = id;
-        await useCase.Execute(request);
+        await useCase.Execute(request, id)!;
 
         return NoContent();
     }
