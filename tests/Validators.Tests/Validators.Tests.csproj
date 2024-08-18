@@ -24,9 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\CashFlow.Application\CashFlow.Application.csproj" />
-    <ProjectReference Include="..\src\CashFlow.Communication\CashFlow.Communication.csproj" />
-    <ProjectReference Include="..\tests\CommonTestUtilities\CommonTestUtilities.csproj" />
+    <ProjectReference Include="..\..\src\CashFlow.Application\CashFlow.Application.csproj" />
+    <ProjectReference Include="..\..\src\CashFlow.Communication\CashFlow.Communication.csproj" />
+    <ProjectReference Include="..\CommonTestUtilities\CommonTestUtilities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

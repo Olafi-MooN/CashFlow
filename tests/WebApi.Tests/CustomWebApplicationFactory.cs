@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using CashFlow.Domain;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace WebApiTest;
+namespace WebApi.Tests;
 
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {

@@ -5,9 +5,9 @@ using CashFlow.Domain.Messages.Reports;
 using CommonTestUtilities;
 using FluentAssertions;
 using System.Net.Http.Headers;
-using WebApiTest.InlineData;
+using WebApi.Tests.InlineData;
 
-namespace WebApiTest.Users.Register;
+namespace WebApi.Tests.Users.Register;
 
 public class RegisterUserTest : IClassFixture<CustomWebApplicationFactory>
 {

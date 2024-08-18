@@ -5,13 +5,13 @@ using CashFlow.Domain.Messages.Reports;
 using CommonTestUtilities;
 using FluentAssertions;
 using System.Net.Http.Headers;
-using WebApiTest.InlineData;
+using WebApi.Tests.InlineData;
 using CashFlow.Domain;
 using CashFlow.Communication;
 using CommonTestUtilities.Requests;
 using CashFlow.Exception;
 
-namespace WebApiTest.Login;
+namespace WebApi.Tests.Login;
 
 public class DoLoginTest : IClassFixture<CustomWebApplicationFactory>
 {

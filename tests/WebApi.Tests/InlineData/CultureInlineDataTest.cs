@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace WebApiTest.InlineData;
+namespace WebApi.Tests.InlineData;
 
 public class CultureInlineDataTest : IEnumerable<object[]>
 {
