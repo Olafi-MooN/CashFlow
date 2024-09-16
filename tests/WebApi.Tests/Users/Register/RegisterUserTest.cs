@@ -9,20 +9,18 @@ using WebApi.Tests.InlineData;
 
 namespace WebApi.Tests.Users.Register;
 
-public class RegisterUserTest : IClassFixture<CustomWebApplicationFactory>
+public class RegisterUserTest : CashFlowClassFixture
 {
     private const string REQUEST_URI = "/api/users";
-    private readonly HttpClient _httpClient;
-    public RegisterUserTest(CustomWebApplicationFactory webApplicationFactory)
+    public RegisterUserTest(CustomWebApplicationFactory webApplicationFactory) : base(webApplicationFactory)
     {
-        _httpClient = webApplicationFactory.CreateClient();
     }
 
     [Fact]
     public async Task Success()
     {
         var request = RequestsRegisterUserJsonBuilder.Build();
-        var response = await _httpClient.PostAsJsonAsync(REQUEST_URI, request);
+        var response = await DoPost(REQUEST_URI, request);
 
         response.Should().BeSuccessful();
         response.StatusCode.Should().Be(HttpStatusCode.Created);
@@ -38,12 +36,10 @@ public class RegisterUserTest : IClassFixture<CustomWebApplicationFactory>
     [ClassData(typeof(CultureInlineDataTest))]
     public async Task Error_Empty_Name(string CultureInfo)
     {
-
         var request = RequestsRegisterUserJsonBuilder.Build();
         request.Name = string.Empty;
 
-        _httpClient.DefaultRequestHeaders.AcceptLanguage.Add(new StringWithQualityHeaderValue(CultureInfo));
-        var response = await _httpClient.PostAsJsonAsync(REQUEST_URI, request);
+        var response = await DoPost(REQUEST_URI, request, cultureName: CultureInfo);
 
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         var body = await response.Content.ReadAsStreamAsync();

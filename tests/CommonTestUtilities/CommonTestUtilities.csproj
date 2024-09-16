@@ -16,4 +16,8 @@
     <ProjectReference Include="..\..\src\ClashFlow.Domain\CashFlow.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

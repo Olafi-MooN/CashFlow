@@ -5,13 +5,16 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using CashFlow.Domain;
 using Microsoft.Extensions.DependencyInjection;
+using WebApi.Tests.Resources;
 
 namespace WebApi.Tests;
 
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
-    private readonly User _user = UserBuilder.Build();
-    private string _userPassword = string.Empty;
+    public ExpenseIdentityManager ExpenseManager { get; private set; } = default!;
+    public UserIdentityManager UserTeamMember { get; private set; } = default!;
+    public UserIdentityManager UserAdmin { get; private set; } = default!;
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Test").ConfigureServices(services =>
@@ -24,21 +27,37 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
                     config.UseInternalServiceProvider(provider);
                 });
 
-            var encryptPassword = services.BuildServiceProvider().GetRequiredService<IEncryptPassword>();
-            var dbContext = services.BuildServiceProvider().GetRequiredService<CashFlowDbContext>();
+            var scope = services.BuildServiceProvider();
+            var encryptPassword = scope.GetRequiredService<IEncryptPassword>();
+            var dbContext = scope.GetRequiredService<CashFlowDbContext>();
+            var tokenGenerator = scope.GetRequiredService<IAccessTokenGenerator>();
 
-            StartDatabase(dbContext, encryptPassword);
+            StartDatabase(dbContext, encryptPassword, tokenGenerator);
         });
     }
 
-    public User GetUser() => _user;
-    public string GetUserPassword() => _userPassword;
-
-    private void StartDatabase(CashFlowDbContext dbContext, IEncryptPassword encryptPassword)
+    private void StartDatabase(CashFlowDbContext dbContext, IEncryptPassword encryptPassword, IAccessTokenGenerator tokenGenerator)
     {
-        _userPassword = _user.Password;
-        _user.Password = encryptPassword.Encrypt(_user.Password);
-        dbContext.Users.Add(_user);
+        var userTeamMember = AddUserTeamMember(dbContext, encryptPassword, tokenGenerator);
+        AddExpenses(dbContext, userTeamMember);
         dbContext.SaveChanges();
+    }
+
+    private User AddUserTeamMember(CashFlowDbContext dbContext, IEncryptPassword encryptPassword, IAccessTokenGenerator tokenGenerator)
+    {
+        var user = UserBuilder.Build();
+        var password = user.Password;
+        user.Password = encryptPassword.Encrypt(user.Password);
+        dbContext.Users.Add(user);
+        var token = tokenGenerator.Generate(user);
+        UserTeamMember = new UserIdentityManager(user, password, token);
+        return user!;
+    }
+
+    private void AddExpenses(CashFlowDbContext dbContext, User user)
+    {
+        var expense = ExpenseBuilder.Build(user);
+        dbContext.Expenses.Add(expense);
+        ExpenseManager = new ExpenseIdentityManager(expense);
     }
 }
