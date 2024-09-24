@@ -1,14 +1,12 @@
-﻿using CashFlow.Communication;
+﻿using System.Reflection;
+using CashFlow.Communication;
 using CashFlow.Domain;
-using PdfSharp.Fonts;
-using MigraDoc.DocumentObjectModel;
 using CashFlow.Domain.Messages.Reports;
-using System.Drawing;
-using Microsoft.VisualBasic;
-using MigraDoc.Rendering;
-using MigraDoc.DocumentObjectModel.Tables;
-using System.Reflection;
 using CashFlow.Domain.Services.LoggedUser;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.DocumentObjectModel.Tables;
+using MigraDoc.Rendering;
+using PdfSharp.Fonts;
 
 
 namespace CashFlow.Application;

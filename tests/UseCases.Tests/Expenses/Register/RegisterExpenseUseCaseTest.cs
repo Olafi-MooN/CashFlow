@@ -1,4 +1,3 @@
-using System;
 using CashFlow.Application.UseCases.Expenses.Register;
 using CashFlow.Exception;
 using CashFlow.Exception.ExceptionBase;

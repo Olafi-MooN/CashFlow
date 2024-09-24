@@ -1,7 +1,5 @@
-using System;
 using AutoMapper;
 using CashFlow.Application;
-using CashFlow.Communication.Responses;
 using CashFlow.Domain;
 using CashFlow.Exception;
 using CommonTestUtilities.Entities;

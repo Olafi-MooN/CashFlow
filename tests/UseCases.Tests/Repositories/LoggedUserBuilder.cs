@@ -1,4 +1,3 @@
-using System;
 using CashFlow.Domain;
 using CashFlow.Domain.Services.LoggedUser;
 using CommonTestUtilities.Entities;

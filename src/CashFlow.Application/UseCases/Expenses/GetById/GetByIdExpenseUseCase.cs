@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using CashFlow.Communication.Responses;
 using CashFlow.Domain;
-using CashFlow.Domain.Security.token;
 using CashFlow.Domain.Services.LoggedUser;
 using CashFlow.Exception;
 

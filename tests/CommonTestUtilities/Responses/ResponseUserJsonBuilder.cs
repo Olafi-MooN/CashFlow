@@ -1,4 +1,3 @@
-using System;
 using Bogus;
 using CashFlow.Communication;
 using CashFlow.Domain;

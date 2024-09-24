@@ -3,7 +3,6 @@ using CashFlow.Domain.Messages.Reports;
 using CashFlow.Exception.ExceptionBase;
 using CommonTestUtilities;
 using FluentAssertions;
-using FluentValidation;
 
 namespace UseCases.Tests.Users.Register;
 

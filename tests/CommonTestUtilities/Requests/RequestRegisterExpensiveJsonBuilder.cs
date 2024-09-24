@@ -1,7 +1,6 @@
 ﻿using Bogus;
 using CashFlow.Communication.Enums;
 using CashFlow.Communication.Requests;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CommonTestUtilities.Requests;
 

@@ -1,12 +1,11 @@
+using CashFlow.Domain;
 using CashFlow.Infrastructure;
 using CommonTestUtilities.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
-using CashFlow.Domain;
 using Microsoft.Extensions.DependencyInjection;
 using WebApi.Tests.Resources;
-using PdfSharp.Drawing;
 
 namespace WebApi.Tests;
 

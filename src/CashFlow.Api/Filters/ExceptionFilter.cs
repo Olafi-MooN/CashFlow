@@ -18,7 +18,7 @@ public class ExceptionFilter : IExceptionFilter
 
     private static void HandleProjectException(ExceptionContext context)
     {
-        var cashFlowException = (CashFlowException)context.Exception;
+        var cashFlowException = (CashFlowException) context.Exception;
         var errorResponse = new ResponseErrorJson(cashFlowException.GetErrors());
 
         context.HttpContext.Response.StatusCode = cashFlowException.StatusCode;

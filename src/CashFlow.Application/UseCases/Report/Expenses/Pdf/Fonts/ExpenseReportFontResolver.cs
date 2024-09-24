@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using DocumentFormat.OpenXml.Presentation;
 using PdfSharp.Fonts;
 
 namespace CashFlow.Application;
@@ -11,7 +10,7 @@ public class ExpenseReportFontResolver : IFontResolver
         var stream = ReadFontFile(faceName) ?? ReadFontFile(FontHelper.DEFAULT_FONT);
         var data = new byte[stream!.Length];
 
-        stream.Read(buffer: data, offset: 0, count: (int)stream!.Length);
+        stream.Read(buffer: data, offset: 0, count: (int) stream!.Length);
 
         return data;
     }

@@ -1,14 +1,14 @@
+using System.Text;
 using CashFlow.Api.Filters;
 using CashFlow.Api.Middlewares;
-using CashFlow.Infrastructure;
+using CashFlow.Api.Token;
 using CashFlow.Application;
+using CashFlow.Domain.Security.token;
+using CashFlow.Infrastructure;
+using CashFlow.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Microsoft.OpenApi.Models;
-using CashFlow.Infrastructure.Extensions;
-using CashFlow.Domain.Security.token;
-using CashFlow.Api.Token;
 
 var builder = WebApplication.CreateBuilder(args);
 

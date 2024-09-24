@@ -1,7 +1,4 @@
-using System;
 using CashFlow.Domain;
-using CommonTestUtilities.Entities;
-using DocumentFormat.OpenXml.Presentation;
 using Moq;
 
 namespace UseCases.Tests.Repositories;

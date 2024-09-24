@@ -1,4 +1,3 @@
-using System;
 using AutoMapper;
 using CashFlow.Application;
 using CashFlow.Communication.Responses;

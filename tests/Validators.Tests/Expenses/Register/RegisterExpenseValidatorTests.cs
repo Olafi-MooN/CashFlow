@@ -47,7 +47,7 @@ public class RegisterExpenseValidatorTests
         // Arrange - Configuração da instancias do que precisa ser executado o teste
         var validator = new ExpensiveValidator();
         var request = new RequestRegisterExpensiveJsonBuilder().Build();
-        request.PaymentType = (EPaymentTypeEnum)1000;
+        request.PaymentType = (EPaymentTypeEnum) 1000;
 
         // Act 
         var result = validator.Validate(request);

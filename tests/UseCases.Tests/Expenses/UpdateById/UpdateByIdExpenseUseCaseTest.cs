@@ -1,4 +1,3 @@
-using System;
 using CashFlow.Application;
 using CashFlow.Communication;
 using CashFlow.Domain;
@@ -30,7 +29,7 @@ public class UpdateByIdExpenseUseCaseTest
         expense.Description.Should().Be(request.Description);
         expense.Date.Should().Be(request.Date);
         expense.Amount.Should().Be(request.Amount);
-        expense.PaymentType.Should().Be((EPaymentTypeEnum)request.PaymentType);
+        expense.PaymentType.Should().Be((EPaymentTypeEnum) request.PaymentType);
     }
 
     [Fact]

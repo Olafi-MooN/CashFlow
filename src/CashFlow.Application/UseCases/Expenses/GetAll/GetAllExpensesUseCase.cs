@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using CashFlow.Application.DTOs;
-using CashFlow.Application.Interfaces;
 using CashFlow.Communication.Responses;
 using CashFlow.Domain;
 using CashFlow.Domain.Services.LoggedUser;

@@ -1,7 +1,7 @@
-﻿using CashFlow.Domain;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using CashFlow.Domain;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CashFlow.Infrastructure;
 

@@ -1,4 +1,3 @@
-using System;
 using CashFlow.Application;
 using CashFlow.Communication;
 using CashFlow.Domain;

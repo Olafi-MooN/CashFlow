@@ -1,10 +1,8 @@
 using System.Net;
-using System.Net.Http.Json;
 using System.Text.Json;
 using CashFlow.Domain.Messages.Reports;
 using CommonTestUtilities;
 using FluentAssertions;
-using System.Net.Http.Headers;
 using WebApi.Tests.InlineData;
 
 namespace WebApi.Tests.Users.Register;

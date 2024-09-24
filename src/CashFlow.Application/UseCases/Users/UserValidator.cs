@@ -1,5 +1,4 @@
 ﻿using CashFlow.Communication;
-using CashFlow.Communication.Requests;
 using CashFlow.Domain.Messages.Reports;
 using FluentValidation;
 

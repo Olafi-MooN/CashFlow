@@ -1,5 +1,3 @@
-using System;
-
 namespace CashFlow.Domain.Services.LoggedUser;
 
 public interface ILoggedUser

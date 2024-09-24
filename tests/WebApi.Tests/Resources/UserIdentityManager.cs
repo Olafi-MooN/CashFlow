@@ -1,4 +1,3 @@
-using System;
 using CashFlow.Domain;
 
 namespace WebApi.Tests.Resources;

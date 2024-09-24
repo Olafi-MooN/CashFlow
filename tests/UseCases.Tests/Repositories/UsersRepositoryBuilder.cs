@@ -1,5 +1,4 @@
 ﻿using CashFlow.Domain;
-using CommonTestUtilities.Responses;
 using Moq;
 
 namespace UseCases.Tests;

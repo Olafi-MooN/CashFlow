@@ -1,11 +1,7 @@
 ﻿using CashFlow.Application;
-using CashFlow.Application.DTOs;
-using CashFlow.Application.Interfaces;
-using CashFlow.Application.UseCases.Expenses.Register;
 using CashFlow.Communication;
 using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
-using CashFlow.Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
