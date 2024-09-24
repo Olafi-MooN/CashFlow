@@ -7,13 +7,13 @@ namespace CommonTestUtilities.Entities;
 
 public static class ExpenseBuilder
 {
-    public static Expense Build(User user)
+    public static Expense Build(User user, long expenseId = 1)
     {
         return new Faker<Expense>()
-            .RuleFor(expense => expense.Id, faker => 1)
+            .RuleFor(expense => expense.Id, _ => expenseId)
             .RuleFor(expense => expense.Title, faker => faker.Commerce.ProductName())
             .RuleFor(expense => expense.Description, faker => faker.Commerce.ProductDescription())
-            .RuleFor(expense => expense.Date, faker => faker.Date.Past())
+            .RuleFor(expense => expense.Date, faker => faker.Date.Recent())
             .RuleFor(expense => expense.PaymentType, faker => faker.PickRandom<EPaymentTypeEnum>())
             .RuleFor(expense => expense.Amount, faker => faker.Random.Decimal(min: 1, max: 1000))
             .RuleFor(expense => expense.UserId, _ => user.Id);

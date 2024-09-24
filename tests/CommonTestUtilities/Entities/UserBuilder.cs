@@ -6,7 +6,7 @@ namespace CommonTestUtilities.Entities;
 
 public static class UserBuilder
 {
-    public static User Build()
+    public static User Build(string role = Roles.TEAM_MEMBER)
     {
         var encryptPassword = EncryptPasswordBuilder.Build();
 
@@ -14,6 +14,7 @@ public static class UserBuilder
             .RuleFor(User => User.Id, _ => Guid.NewGuid())
             .RuleFor(user => user.Name, faker => faker.Name.FirstName())
             .RuleFor(user => user.Email, (faker, user) => faker.Internet.Email(user.Name))
+            .RuleFor(user => user.Role, _ => role)
             .RuleFor(user => user.Password, (_, user) => encryptPassword.Encrypt(user.Password));
     }
 }

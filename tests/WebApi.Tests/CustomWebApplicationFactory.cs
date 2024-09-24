@@ -6,12 +6,14 @@ using Microsoft.EntityFrameworkCore;
 using CashFlow.Domain;
 using Microsoft.Extensions.DependencyInjection;
 using WebApi.Tests.Resources;
+using PdfSharp.Drawing;
 
 namespace WebApi.Tests;
 
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
-    public ExpenseIdentityManager ExpenseManager { get; private set; } = default!;
+    public ExpenseIdentityManager ExpenseTeamMemberManager { get; private set; } = default!;
+    public ExpenseIdentityManager ExpenseAdminManager { get; private set; } = default!;
     public UserIdentityManager UserTeamMember { get; private set; } = default!;
     public UserIdentityManager UserAdmin { get; private set; } = default!;
 
@@ -39,7 +41,11 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     private void StartDatabase(CashFlowDbContext dbContext, IEncryptPassword encryptPassword, IAccessTokenGenerator tokenGenerator)
     {
         var userTeamMember = AddUserTeamMember(dbContext, encryptPassword, tokenGenerator);
-        AddExpenses(dbContext, userTeamMember);
+        var userAdmin = AddUserAdmin(dbContext, encryptPassword, tokenGenerator);
+
+        ExpenseTeamMemberManager = new ExpenseIdentityManager(AddExpenses(dbContext, userTeamMember, expenseId: 1));
+        ExpenseAdminManager = new ExpenseIdentityManager(AddExpenses(dbContext, userAdmin, expenseId: 2));
+
         dbContext.SaveChanges();
     }
 
@@ -54,10 +60,22 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         return user!;
     }
 
-    private void AddExpenses(CashFlowDbContext dbContext, User user)
+    private User AddUserAdmin(CashFlowDbContext dbContext, IEncryptPassword encryptPassword, IAccessTokenGenerator tokenGenerator)
     {
-        var expense = ExpenseBuilder.Build(user);
+        var user = UserBuilder.Build(Roles.ADMIN);
+        var password = user.Password;
+        user.Password = encryptPassword.Encrypt(user.Password);
+        dbContext.Users.Add(user);
+        var token = tokenGenerator.Generate(user);
+        UserAdmin = new UserIdentityManager(user, password, token);
+        return user!;
+    }
+
+    private static Expense AddExpenses(CashFlowDbContext dbContext, User user, long expenseId)
+    {
+        var expense = ExpenseBuilder.Build(user, expenseId);
         dbContext.Expenses.Add(expense);
-        ExpenseManager = new ExpenseIdentityManager(expense);
+
+        return expense;
     }
 }

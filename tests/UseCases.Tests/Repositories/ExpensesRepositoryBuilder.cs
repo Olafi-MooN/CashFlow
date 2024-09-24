@@ -34,6 +34,7 @@ public class ExpensesRepositoryBuilder
         if (expense is not null) _repository.Setup(x => x.DeleteById(expense.Id)).ReturnsAsync(true);
         return this;
     }
+
     public ExpensesRepositoryBuilder UpdateById(Expense? expense)
     {
         if (expense is not null) _repository.Setup(x => x.UpdateById(expense)).ReturnsAsync(true);
@@ -42,7 +43,13 @@ public class ExpensesRepositoryBuilder
 
     public ExpensesRepositoryBuilder GetByIdUpdate(long? id, Guid userId, Expense? expense)
     {
-        if ((expense is not null) && (id is not null)) _repository.Setup(x => x.GetByIdUpdate((long)id, userId)).ReturnsAsync(expense);
+        if ((expense is not null) && (id is not null)) _repository.Setup(x => x.GetByIdUpdate((long) id, userId)).ReturnsAsync(expense);
+        return this;
+    }
+
+    public ExpensesRepositoryBuilder GetByIdMonth(Guid userId, List<Expense> expenses)
+    {
+        _repository.Setup(x => x.FilterByMonth(It.IsAny<DateOnly>(), userId)).ReturnsAsync(expenses);
         return this;
     }
 }
