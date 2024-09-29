@@ -1,5 +1,6 @@
 ﻿using CashFlow.Application;
 using CashFlow.Application.UseCases.Users.Profile;
+using CashFlow.Application.UseCases.Users.Update;
 using CashFlow.Communication;
 using CashFlow.Communication.Responses;
 using Microsoft.AspNetCore.Authorization;
@@ -28,5 +29,16 @@ public class UsersController : ControllerBase
         var response = await useCase.Execute();
 
         return Ok(response);
+    }
+
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    [Authorize]
+    public async Task<IActionResult> UpdateProfile([FromBody] RequestUpdateUserJson body, [FromServices] IUpdateUserUseCase useCase)
+    {
+        await useCase.Execute(body);
+
+        return NoContent();
     }
 }

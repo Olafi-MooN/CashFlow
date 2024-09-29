@@ -85,7 +85,7 @@ app.MapControllers();
 
 if (!builder.Configuration.IsTestEnvironment()) await MigrateDatabase();
 
-app.Run();
+await app.RunAsync();
 
 async Task MigrateDatabase()
 {

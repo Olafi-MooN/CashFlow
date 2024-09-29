@@ -8,11 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CashFlow.Exception
-{
+namespace CashFlow.Exception {
     using System;
-
-
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,142 +22,131 @@ namespace CashFlow.Exception
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ResourceErrorMessages
-    {
-
+    public class ResourceErrorMessages {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourceErrorMessages()
-        {
+        internal ResourceErrorMessages() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if (object.ReferenceEquals(resourceMan, null))
-                {
+        public static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CashFlow.Exception.ResourceErrorMessages", typeof(ResourceErrorMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        public static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The Amount must be greater than zero.
         /// </summary>
-        public static string AMOUNT_GREATER_THAN_ZERO
-        {
-            get
-            {
+        public static string AMOUNT_GREATER_THAN_ZERO {
+            get {
                 return ResourceManager.GetString("AMOUNT_GREATER_THAN_ZERO", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The amount is required.
         /// </summary>
-        public static string AMOUNT_REQUIRED
-        {
-            get
-            {
+        public static string AMOUNT_REQUIRED {
+            get {
                 return ResourceManager.GetString("AMOUNT_REQUIRED", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to The payment type is EPaymentTypeEnum.
+        ///   Looks up a localized string similar to E-mail already registerd.
         /// </summary>
-        public static string PAYMENT_TYPE_ENUM
-        {
-            get
-            {
-                return ResourceManager.GetString("PAYMENT_TYPE_ENUM", resourceCulture);
+        public static string EMAIL_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("EMAIL_ALREADY_REGISTERED", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to The payment type is required.
+        ///   Looks up a localized string similar to E-mail or password is invalid.
         /// </summary>
-        public static string PAYMENT_TYPE_REQUIRED
-        {
-            get
-            {
-                return ResourceManager.GetString("PAYMENT_TYPE_REQUIRED", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to The title is required.
-        /// </summary>
-        public static string TITLE_REQUIRED
-        {
-            get
-            {
-                return ResourceManager.GetString("TITLE_REQUIRED", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Unknow error.
-        /// </summary>
-        public static string UNKNOWN_ERROR
-        {
-            get
-            {
-                return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Expense not found.
-        /// </summary>
-        public static string EXPENSE_NOT_FOUND
-        {
-            get
-            {
-                return ResourceManager.GetString("EXPENSE_NOT_FOUND", resourceCulture);
-            }
-        }
-
-        public static string EMAIL_OR_PASSWORD_INVALID
-        {
-            get
-            {
+        public static string EMAIL_OR_PASSWORD_INVALID {
+            get {
                 return ResourceManager.GetString("EMAIL_OR_PASSWORD_INVALID", resourceCulture);
             }
         }
-
-        public static string TOKEN_REQUIRED
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expense not found.
+        /// </summary>
+        public static string EXPENSE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("EXPENSE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The payment type is EPaymentTypeEnum.
+        /// </summary>
+        public static string PAYMENT_TYPE_ENUM {
+            get {
+                return ResourceManager.GetString("PAYMENT_TYPE_ENUM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The payment type is required.
+        /// </summary>
+        public static string PAYMENT_TYPE_REQUIRED {
+            get {
+                return ResourceManager.GetString("PAYMENT_TYPE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The title is required.
+        /// </summary>
+        public static string TITLE_REQUIRED {
+            get {
+                return ResourceManager.GetString("TITLE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The toke is required.
+        /// </summary>
+        public static string TOKEN_REQUIRED {
+            get {
                 return ResourceManager.GetString("TOKEN_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknow error.
+        /// </summary>
+        public static string UNKNOWN_ERROR {
+            get {
+                return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
             }
         }
     }
