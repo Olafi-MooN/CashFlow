@@ -40,7 +40,7 @@ public class DeleteByIdExpenseUseCaseTest
     private DeleteExpenseById CreateUseCase(IMapper mapper, Expense expense, User user)
     {
         var repository = new ExpensesRepositoryBuilder().GetById(user.Id, expense).DeleteById(expense).Build();
-        var loggedUser = new LoggedUserBuilder().Build(user).Build();
+        var loggedUser = new LoggedUserBuilder().WithUser(user).Build();
         var unitOfWork = UnitOfWorkBuilder.Build();
 
         return new DeleteExpenseById(repository, unitOfWork, loggedUser);

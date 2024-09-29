@@ -16,7 +16,7 @@ public class LoggedUserBuilder
     }
 
     public ILoggedUser Build() => _mock.Object;
-    public LoggedUserBuilder Build(User user)
+    public LoggedUserBuilder WithUser(User user)
     {
         _mock.Setup(m => m.Get()).ReturnsAsync(user);
         return this;

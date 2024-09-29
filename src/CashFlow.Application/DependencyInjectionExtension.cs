@@ -1,4 +1,5 @@
 ﻿using CashFlow.Application.UseCases.Expenses.Register;
+using CashFlow.Application.UseCases.Users.Profile;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CashFlow.Application;
@@ -27,5 +28,7 @@ public static class DependencyInjectionExtension
         services.AddScoped<IGenerateExpenseReportPdfUseCase, GenerateExpenseReportPdfUseCase>();
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
         services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+        services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
+
     }
 }

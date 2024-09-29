@@ -74,7 +74,7 @@ public class UpdateByIdExpenseUseCaseTest
 
         var repository = new ExpensesRepositoryBuilder().GetByIdUpdate(expense.Id, user.Id, expense).UpdateById(mapper.Map<Expense>(requestUpdateExpenseJson)).Build();
         var unitOfWork = UnitOfWorkBuilder.Build();
-        var loggedUser = new LoggedUserBuilder().Build(user).Build();
+        var loggedUser = new LoggedUserBuilder().WithUser(user).Build();
 
         return new UpdateByIdExpenseUseCase(repository, unitOfWork, mapper, loggedUser);
     }

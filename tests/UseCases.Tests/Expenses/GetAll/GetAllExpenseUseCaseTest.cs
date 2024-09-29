@@ -30,7 +30,7 @@ public class GetAllExpenseUseCaseTest
     {
         var repository = new ExpensesRepositoryBuilder().GetAllRead(user, expenses).Build();
 
-        var loggedUser = new LoggedUserBuilder().Build(user).Build();
+        var loggedUser = new LoggedUserBuilder().WithUser(user).Build();
 
         return new GetAllExpensesUseCase(repository, mapper, loggedUser);
     }

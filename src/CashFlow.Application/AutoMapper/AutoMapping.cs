@@ -28,5 +28,7 @@ public class AutoMapping : Profile
         CreateMap<Expense, ResponseExpenseJson>().ReverseMap();
         CreateMap<List<Expense>, ResponseExpensesJson>().ReverseMap();
         CreateMap<User, ResponseRegisteredUserJson>().ReverseMap();
+        CreateMap<User, ResponseUserProfileJson>().ReverseMap();
+
     }
 }

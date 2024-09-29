@@ -41,7 +41,7 @@ public class GetByIdExpenseUseCaseTest
     private GetByIdExpenseUseCase CreateUseCase(User user, IMapper mapper, Expense? expense = null)
     {
         var repository = new ExpensesRepositoryBuilder().GetById(user.Id, expense).Build();
-        var loggedUser = new LoggedUserBuilder().Build(user).Build();
+        var loggedUser = new LoggedUserBuilder().WithUser(user).Build();
 
         return new GetByIdExpenseUseCase(repository, mapper, loggedUser);
     }

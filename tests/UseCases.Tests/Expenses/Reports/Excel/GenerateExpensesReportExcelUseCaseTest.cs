@@ -36,7 +36,7 @@ public class GenerateExpensesReportExcelUseCaseTest
     private static GenerateExpenseReportExcelUseCase CreateUseCase(User user, List<Expense> expenses)
     {
         var repository = new ExpensesRepositoryBuilder().GetByIdMonth(user.Id, expenses).Build();
-        var loggedUser = new LoggedUserBuilder().Build(user).Build();
+        var loggedUser = new LoggedUserBuilder().WithUser(user).Build();
 
         return new GenerateExpenseReportExcelUseCase(repository, loggedUser);
     }
