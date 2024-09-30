@@ -28,12 +28,12 @@ public class UpdateUserTest : CashFlowClassFixture
 
     [Theory]
     [ClassData(typeof(CultureInlineDataTest))]
-    public async Task Error_Empty_Name(string CultureInfo)
+    public async Task Error_Empty_Name(string cultureInfo)
     {
         var request = RequestsRegisterUserJsonBuilder.Build();
         request.Name = string.Empty;
 
-        var response = await DoPut(REQUEST_URI, request, _token, cultureName: CultureInfo);
+        var response = await DoPut(REQUEST_URI, request, _token, cultureName: cultureInfo);
 
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         var body = await response.Content.ReadAsStreamAsync();
@@ -42,7 +42,7 @@ public class UpdateUserTest : CashFlowClassFixture
 
         var bodyJson = await JsonDocument.ParseAsync(body);
         var errors = bodyJson.RootElement.GetProperty("errorMessages").EnumerateArray();
-        var expectedMessage = ResourceReportGenerationMessages.ResourceManager.GetString("NAME_REQUIRED", new System.Globalization.CultureInfo(CultureInfo));
+        var expectedMessage = ResourceReportGenerationMessages.ResourceManager.GetString("NAME_REQUIRED", new System.Globalization.CultureInfo(cultureInfo));
         errors.Should().HaveCount(1).And.Contain(errors => errors.GetString()!.Equals(expectedMessage));
     }
 }
