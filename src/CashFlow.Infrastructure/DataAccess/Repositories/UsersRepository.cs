@@ -36,4 +36,10 @@ internal class UsersRepository : IUsersRepository
     {
         _dbContext.Users.Update(user);
     }
+
+    public async Task Delete(Guid id)
+    {
+        var user = await _dbContext.Users.FindAsync(id);
+        _dbContext.Users.Remove(user!);
+    }
 }

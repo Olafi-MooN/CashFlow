@@ -1,5 +1,6 @@
 ﻿using CashFlow.Domain.Messages.Reports;
 using CommonTestUtilities;
+using CommonTestUtilities.Requests;
 using FluentAssertions;
 using System.Net;
 using System.Text.Json;
@@ -19,7 +20,7 @@ public class UpdateUserTest : CashFlowClassFixture
     [Fact]
     public async Task Success()
     {
-        var request = RequestsRegisterUserJsonBuilder.Build();
+        var request = RequestUpdateUserJsonFakerBuilder.Build();
         var response = await DoPut(REQUEST_URI, request, _token);
 
         response.Should().BeSuccessful();
@@ -30,7 +31,7 @@ public class UpdateUserTest : CashFlowClassFixture
     [ClassData(typeof(CultureInlineDataTest))]
     public async Task Error_Empty_Name(string cultureInfo)
     {
-        var request = RequestsRegisterUserJsonBuilder.Build();
+        var request = RequestUpdateUserJsonFakerBuilder.Build();
         request.Name = string.Empty;
 
         var response = await DoPut(REQUEST_URI, request, _token, cultureName: cultureInfo);

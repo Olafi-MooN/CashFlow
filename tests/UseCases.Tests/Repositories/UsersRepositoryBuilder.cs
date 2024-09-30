@@ -32,5 +32,11 @@ public class UsersRepositoryBuilder
         return this;
     }
 
+    public UsersRepositoryBuilder Delete(Guid id)
+    {
+        _repository.Setup(x => x.Delete(id));
+        return this;
+    }
+
     public IUsersRepository Build() => _repository.Object;
 }
