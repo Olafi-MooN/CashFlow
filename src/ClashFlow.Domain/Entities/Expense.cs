@@ -1,4 +1,6 @@
-﻿namespace CashFlow.Domain;
+﻿using CashFlow.Domain.Entities;
+
+namespace CashFlow.Domain;
 
 public class Expense
 {
@@ -10,4 +12,5 @@ public class Expense
     public EPaymentTypeEnum PaymentType { get; set; }
     public Guid UserId { get; set; }
     public User? User { get; set; }
+    public ICollection<Tag> Tags { get; set; } = [];
 }
