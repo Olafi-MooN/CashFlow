@@ -24,13 +24,14 @@ internal class ExpensesRepository : IExpensesRepository
 
     async Task<Expense?> IExpenseReadOnlyRepository.GetByIdRead(long id, Guid userId)
     {
-        var response = await _dbContext.Expenses.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
+        var response = await _dbContext.Expenses.Include(x => x.Tags)
+            .AsNoTracking().FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
         return response;
     }
 
     async Task<Expense?> IExpensesUpdateOnlyRepository.GetByIdUpdate(long id, Guid userId)
     {
-        var response = await _dbContext.Expenses.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
+        var response = await _dbContext.Expenses.Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
         return response;
     }
 

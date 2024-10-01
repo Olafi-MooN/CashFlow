@@ -31,8 +31,11 @@ public class AutoMapping : Profile
 
     private void EntityToResponseAndReverse()
     {
+        CreateMap<Expense, ResponseExpenseJson>()
+            .ForMember(dest => dest.Tags, config => config.MapFrom(source => source.Tags.Select(tag => tag.Value)))
+            .ReverseMap();
+
         CreateMap<Expense, ResponseRegisteredExpenseJson>().ReverseMap();
-        CreateMap<Expense, ResponseExpenseJson>().ReverseMap();
         CreateMap<List<Expense>, ResponseExpensesJson>().ReverseMap();
         CreateMap<User, ResponseRegisteredUserJson>().ReverseMap();
         CreateMap<User, ResponseUserProfileJson>().ReverseMap();

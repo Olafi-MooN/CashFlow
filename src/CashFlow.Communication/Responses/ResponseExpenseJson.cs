@@ -10,4 +10,5 @@ public class ResponseExpenseJson
     public decimal Amount { get; set; }
     public DateTime Date { get; set; }
     public EPaymentTypeEnum PaymentType { get; set; }
+    public IList<ETagTypeEnum> Tags { get; set; } = [];
 }
