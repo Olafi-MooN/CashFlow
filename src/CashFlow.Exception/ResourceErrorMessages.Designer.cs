@@ -106,6 +106,15 @@ namespace CashFlow.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value provided is not valid for the &apos;({0})&apos; choise ({1}).
+        /// </summary>
+        public static string MUST_BE_IN_ENUM {
+            get {
+                return ResourceManager.GetString("MUST_BE_IN_ENUM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password is different of current password.
         /// </summary>
         public static string PASSWORD_DIFFERENT_CURRENT_PASSWORD {

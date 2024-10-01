@@ -9,4 +9,5 @@ public class RequestRegisterExpensiveJson
     public DateTime Date { get; set; }
     public decimal Amount { get; set; }
     public EPaymentTypeEnum PaymentType { get; set; } = EPaymentTypeEnum.DebitCard;
+    public IList<ETagTypeEnum> Tags { get; set; } = [];
 }

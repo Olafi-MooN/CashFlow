@@ -3,6 +3,7 @@ using CashFlow.Communication;
 using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
 using CashFlow.Domain;
+using CashFlow.Domain.Entities;
 
 namespace CashFlow.Application;
 
@@ -20,6 +21,12 @@ public class AutoMapping : Profile
         CreateMap<RequestRegisterExpensiveJson, Expense>().ReverseMap();
         CreateMap<RequestRegisterUserJson, User>().ForMember(x => x.Password, x => x.Ignore()).ReverseMap();
         CreateMap<RequestLoginJson, User>().ReverseMap();
+
+        CreateMap<RequestRegisterExpensiveJson, Expense>().
+            ForMember(dest => dest.Tags, config => config.MapFrom(source => source.Tags.Distinct()));
+
+        CreateMap<Communication.Enums.ETagTypeEnum, Tag>().
+            ForMember(dest => dest.Value, config => config.MapFrom(source => source));
     }
 
     private void EntityToResponseAndReverse()
