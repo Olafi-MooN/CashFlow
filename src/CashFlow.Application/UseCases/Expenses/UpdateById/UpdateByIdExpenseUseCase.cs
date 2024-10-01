@@ -36,6 +36,8 @@ public class UpdateByIdExpenseUseCase : IUpdateByIdExpenseUseCase
         var loggedUserResult = await _loggedUser.Get();
         var expense = await (_repository as IExpensesUpdateOnlyRepository).GetByIdUpdate(long.Parse(parameters[0].ToString()!), loggedUserResult.Id) ?? throw new NotFoundException(ResourceErrorMessages.EXPENSE_NOT_FOUND);
 
+        expense.Tags.Clear();
+
         await _repository.UpdateById(_mapper.Map(request, expense));
         await _unitOfWork.Commit();
 
